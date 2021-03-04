@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mole:assertions:assertRange should assert a specific range 1`] = `
+"
+[context]: test@arg
+[failure cause]: out of bounds of 1..7
+[actual value]: 0
+[actual value type]: Number"
+`;
+
+exports[`Mole:assertions:assertRange should assert a specific range 2`] = `
+"
+[context]: test@arg
+[failure cause]: out of bounds of 1..7
+[actual value]: 8
+[actual value type]: Number"
+`;
