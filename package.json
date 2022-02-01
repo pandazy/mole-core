@@ -7,6 +7,7 @@
 	"version": "1.0.4",
 	"description": "A fundamental utility library",
 	"main": "dist/index.js",
+	"pandazy_docker_v": "/Users/martinz/linux-dev/mole-core",
 	"types": "dist/index.d.ts",
 	"devDependencies": {
 		"@types/jest": "^26.0.20",
@@ -24,7 +25,8 @@
 		"prepare": "yarn build",
 		"test": "yarn lint && yarn clean && yarn test:clear-cache && jest --watchAll --coverage",
 		"lint": "tslint -p tsconfig.json",
-		"release": "yarn lint && jest && yarn publish && git clean -fd"
+		"release": "yarn lint && jest && yarn publish && git clean -fd",
+		"docker-run": "RUNNER=${RUNNER:-start} sh docker/run.sh $npm_package_pandazy_docker_v"
 	},
 	"keywords": [
 		"TypeScript",
