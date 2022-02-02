@@ -4,7 +4,7 @@
 		"typescript": "~4.5.5"
 	},
 	"name": "@pandazy/mole-core",
-	"version": "1.0.5",
+	"version": "1.0.7",
 	"description": "A fundamental utility library",
 	"main": "dist/index.js",
 	"pandazy_docker_v": "/Users/martinz/linux-dev/mole-core",
@@ -17,7 +17,7 @@
 		"tslint-config-prettier": "^1.18.0"
 	},
 	"scripts": {
-    "build": "yarn clean && tsc --build tsconfig.build.json",
+		"build": "yarn clean && tsc --build tsconfig.build.json",
 		"clean": "rm -rf dist && rm -rf coverage",
 		"test:clear-cache": " jest --clearCache",
 		"prepare": "yarn build",
