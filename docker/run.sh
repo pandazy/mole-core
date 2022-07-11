@@ -2,17 +2,17 @@
 
 # 
 # Params definition:
-# $CMD: a script comand defined in package.json's "scripts" section
-# $DERMIS_VOLUMN_PATH: the local dev path of the code directory where the docker container runs 
-# $PORT: React dev server's URL port number 
+# $YARN: a valid yarn command (native yarn command or a script defined by package.json)
+# $MOLE_CORE_VOLUMN_PATH: the local dev path of the code directory where the docker container runs 
+# $PORT: HTTP server's URL port number 
 #
 # Usage example:
 #```
 # sh docker/run.sh
 #
-# SCRIPT=test sh docker/run.sh
-# SCRIPT=start
+# YARN=test sh docker/run.sh
+# YARN=start
 # ```
 #
 
-docker run --rm -ti --env SCRIPT=${SCRIPT:-start} -v $MOLE_VOLUMN_PATH:/dermis -p ${PORT:-3000}:3000 jszhengyq/dermis
+docker run --rm -ti --env YARN=${YARN:-start} -v $MOLE_CORE_VOLUMN_PATH:/dermis -p ${PORT:-3000}:3000 jszhengyq/dermis
