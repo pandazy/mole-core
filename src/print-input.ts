@@ -8,9 +8,9 @@ const printNull = (ag: any) => `${ag}`;
 const printJSON = (ag: any) => stringify(ag);
 
 export const printInput: (input: any) => string = cond<string>([
-	when(isA(String))(stringify),
-	when(isA(Function))(printFunc),
-	when(isA(Object))(printJSON),
-	when(isA(Nil))(printNull),
-	otherwise(printDesc),
+  when(isA(String))(stringify),
+  when(isA(Function))(printFunc),
+  when(isA(Object))(printJSON),
+  when(isA(Nil))(printNull),
+  otherwise(printDesc),
 ]);

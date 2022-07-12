@@ -1,2 +1,2 @@
-export const isLt = (standard: number) => (challenge: number): boolean =>
-	challenge < standard;
+export const isLt = (standard: number) =>
+  (challenge: number): boolean => challenge < standard;

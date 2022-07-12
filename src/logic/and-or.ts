@@ -1,22 +1,21 @@
 import { Lambda } from '../types';
 
 function conditionsMet<Input>(
-	strategy: 'or' | 'and',
-	predicates: Lambda<boolean>[],
+  strategy: 'and' | 'or',
+  predicates: Lambda<boolean>[],
 ) {
-	return (...args: Input[]) => {
-		const checkMethod = (strategy === 'and'
-			? predicates.every
-			: predicates.some
-		).bind(predicates);
-		return checkMethod((isMet: Lambda<boolean>) => isMet(...args));
-	};
+  return (...args: Input[]) => {
+    const checkMethod = (
+      strategy === 'and' ? predicates.every : predicates.some
+    ).bind(predicates);
+    return checkMethod((isMet: Lambda<boolean>) => isMet(...args));
+  };
 }
 
 export function and<Input>(...predicates: Lambda<boolean>[]) {
-	return conditionsMet<Input>('and', predicates);
+  return conditionsMet<Input>('and', predicates);
 }
 
 export function or<Input>(...predicates: Lambda<boolean>[]) {
-	return conditionsMet<Input>('or', predicates);
+  return conditionsMet<Input>('or', predicates);
 }

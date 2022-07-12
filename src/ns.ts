@@ -1,3 +1,3 @@
 export function ns(context: string): string {
-	return `Mole:${context}`;
+  return `Mole:${context}`;
 }
