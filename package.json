@@ -4,7 +4,7 @@
 		"typescript": "4.7.4"
 	},
 	"name": "@pandazy/mole-core",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"description": "A fundamental utility library",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
