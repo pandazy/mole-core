@@ -4,6 +4,6 @@ exports[`Mole:assertions:assertType should assert a specific type 1`] = `
 "
 [context]: test@arg
 [failure cause]: type must be Array
-[actual value]: \\"a\\"
+[actual value]: "a"
 [actual value type]: String"
 `;

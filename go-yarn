@@ -1,0 +1,100 @@
+#!/bin/bash
+
+yarn=""         # yarn command to run in the docker container, e.g., start, build, test
+port=3000       # port to run the docker container on
+inner_port=3000 # port of the inner docker container to run the yarn command on, e.g. a react server might use 5000 instead of 3000
+
+# show the usage of this script
+show_usage() {
+  echo "Usage: $0 -t <yarn_comand> [-h][-p <port>]"
+  echo "Example:"
+  echo " $0 -t start"
+  echo " $0 -t start -p 3002"
+  echo "Arguments:"
+  echo "  -t  specify the yarn command to run, e.g. start, build, test"
+  echo "  -h  show this help text"
+  echo "  -p  optional, specify the port to run the docker container on, by default 3000"
+  echo "  -i  optional, specify the inner port of the docker container to run the yarn command on, by default 3000"
+}
+
+while getopts "i:p:t:h" opt; do
+  case $opt in
+  h) # support the -h option to show the usage
+    show_usage
+    exit 0
+    ;;
+  t) # support the -t option to specify the yarn command to run
+    yarn=$OPTARG
+    ;;
+  i) # support the -i option to specify the inner port of the docker container to run the yarn command on
+    inner_port=$OPTARG
+    echo "inner_port is $inner_port"
+    if ! [[ $inner_port =~ ^[0-9]+$ ]]; then
+      echo "Error: '$inner_port' is not a number" >&2
+      exit 1
+    fi
+    ;;
+  p) # support the -p option to specify the port to run the docker container on
+    port=$OPTARG
+    echo "port is $port"
+    if ! [[ $port =~ ^[0-9]+$ ]]; then
+      echo "Error: '$port' is not a number" >&2
+      exit 1
+    fi
+    ;;
+  \?)
+    echo "Invalid option: -$OPTARG" >&2
+    exit 1
+    ;; # output an error message and exit
+  :)
+    echo "Option -$OPTARG requires an argument." >&2
+    exit 1
+    ;; # output an error message and exit
+  :)
+    echo "Usage: $0 [-n name] file ..." >&2
+    exit 1
+    ;; # output a usage message and exit
+  esac
+done
+
+# read the config file and run the docker container with the current directory as the working directory for Node.js
+read_config() {
+  flname="$1"
+  if test -z "$port"; then
+    port=3000
+  fi
+  echo "You are using Docker to run this command: yarn $yarn"
+  echo "Ports: $port:$inner_port"
+  echo "Reading running config from $flname..."
+  source "$flname"
+  docker run --rm -ti --env YARN=$yarn -v $FOLDER:/dermis -p $port:$inner_port jszhengyq/dermis
+}
+
+filename=".pandazy-dev"
+
+if test -z "$yarn"; then
+  show_usage
+  exit
+fi
+
+if ! command -v docker &>/dev/null; then
+  echo "Docker could not be found. Please install Docker."
+  exit
+fi
+
+if test -f "$filename"; then
+  read_config "$filename"
+else
+  echo "Running config $filename does not exist. Creating..."
+
+  # https://stackoverflow.com/a/246128/12028365
+  # Get the directory where this script is running from
+  cwd="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
+  if [[ -z "$port" ]]; then
+    port=3000
+  fi
+  echo "Saving running config to $filename..."
+  echo "FOLDER=$cwd" >>"$filename"
+  read_config "$filename"
+fi
