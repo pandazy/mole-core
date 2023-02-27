@@ -607,10 +607,10 @@
   resolved "https://registry.yarnpkg.com/@pandazy/eslint-config-mole/-/eslint-config-mole-0.1.0.tgz#ac61e61b33138704e5b98404b67a25508e805116"
   integrity sha512-T13vYbe+gg1yKfEvPjQi340FW4YBuD/GbfjSYjHawyc7dN+Mk4JmOt0JONAXEE48bwjueAsX33UJ8os6MdQvFQ==
 
-"@pandazy/mole-config@0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@pandazy/mole-config/-/mole-config-0.1.5.tgz#b293c874e5601aa57ef20275c8c80929661b3f9b"
-  integrity sha512-ymoQHaaNCruVlO7NaNPMX9ujiwtpQW44lLT8ThcHcRK4apBd2FJFCHKv2X7U1yc8E5CNoEkAzW3iktfmIJQrzg==
+"@pandazy/mole-config@0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@pandazy/mole-config/-/mole-config-0.1.6.tgz#3dedb144e8a5342af40c7ebaab806e3ce4a2868d"
+  integrity sha512-EqMl13T57VEtlfm1oKOC+isJkxtwbS6tSY3p7/346MtCVk/YpwUySjku67UW/rYgDrUUjSD+j8nxiAKtUSYmiA==
 
 "@sinclair/typebox@^0.25.16":
   version "0.25.24"
