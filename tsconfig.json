@@ -1,18 +1,16 @@
 {
   "extends": "@pandazy/mole-config/tsconfig.json",
   "compilerOptions": {
-    "outDir": "./dist",
-    "baseUrl": "./src",
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    },
+    "outDir": "dist",
+    "baseUrl": "src",
   },
   "include": [
+    "./src/*",
     "./src/**/*"
   ],
   "exclude": [
-    "./node_modules"
+    "./node_modules",
+    "./dist/*",
+    "./dist/**/*",
   ]
 }

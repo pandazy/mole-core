@@ -12,6 +12,8 @@ yarn-error.log*
 tsconfig.json
 tsconfig.build.json
 
+src
+
 # Test settings
 jest.config.js
 
@@ -24,5 +26,4 @@ node_modules/
 # Optional npm cache directory
 .npm
 
-# pandazy developer's personal settings
-.pandazy-dev
+.pandazy

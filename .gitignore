@@ -24,4 +24,5 @@ node_modules/
 
 dist
 
-.pandazy-dev
+.pandazy/docker
+.pandazy/_node_modules
