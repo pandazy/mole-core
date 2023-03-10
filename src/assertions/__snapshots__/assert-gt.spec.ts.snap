@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Mole:assertions:assertGt should assert a value greater than a number 1`] = `
-"
-[context]: test@arg
-[failure cause]: must be greater than 6
-[actual value]: 3
-[actual value type]: Number"
-`;

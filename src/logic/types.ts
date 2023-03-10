@@ -1,5 +1,8 @@
-import { Lambda } from '../types';
+export type Predicate<TArgs extends unknown[]> = (...args: TArgs) => boolean;
 
-export type Condition<T = any> = [Lambda<boolean>, Lambda<T>];
+export type Calc<TArgs extends unknown[], TResult = unknown> = (...args: TArgs) => TResult;
 
-export type ConditionList<T = any> = Condition<T>[];
+export type Condition<TArgs extends unknown[], TResult = unknown> = [
+  Predicate<TArgs>,
+  Calc<TArgs, TResult>
+];

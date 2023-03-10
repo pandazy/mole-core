@@ -1,21 +1,24 @@
-import { Lambda } from '../types';
+type Predicate<TArgs extends unknown[]> = (...args: TArgs) => boolean;
 
-function conditionsMet<Input>(
-  strategy: 'and' | 'or',
-  predicates: Lambda<boolean>[],
-) {
-  return (...args: Input[]) => {
-    const checkMethod = (
-      strategy === 'and' ? predicates.every : predicates.some
-    ).bind(predicates);
-    return checkMethod((isMet: Lambda<boolean>) => isMet(...args));
-  };
+export type LogicOp = 'and' | 'or';
+
+export function ifAll<TArgs extends unknown[]>(
+  op: LogicOp,
+  predicates: Predicate<TArgs>[]
+): (...args: TArgs) => boolean {
+  const meetCriteria =
+    op === 'and' ? predicates.every.bind(predicates) : predicates.some.bind(predicates);
+  return (...args: TArgs): boolean => meetCriteria((isMet: Predicate<TArgs>) => isMet(...args));
 }
 
-export function and<Input>(...predicates: Lambda<boolean>[]) {
-  return conditionsMet<Input>('and', predicates);
+export function and<TArgs extends unknown[]>(
+  ...predicates: Predicate<TArgs>[]
+): (...args: TArgs) => boolean {
+  return ifAll<TArgs>('and', predicates);
 }
 
-export function or<Input>(...predicates: Lambda<boolean>[]) {
-  return conditionsMet<Input>('or', predicates);
+export function or<TArgs extends unknown[]>(
+  ...predicates: Predicate<TArgs>[]
+): (...args: TArgs) => boolean {
+  return ifAll<TArgs>('or', predicates);
 }

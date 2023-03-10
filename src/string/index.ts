@@ -1,3 +1,6 @@
+import searchAll from './search-all';
+import stringify from './stringify';
+
 export * from './replace-all';
-export * from './search-all';
-export * from './stringify';
+
+export { searchAll, stringify };

@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Mole:print-input should print an arbitrary value 1`] = `"<Function: anonymous>"`;
-
-exports[`Mole:print-input should print an arbitrary value 2`] = `"<Function: callIt>"`;

@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Mole:assertions:assertLt should assert a value less than a number 1`] = `
-"
-[context]: test@arg
-[failure cause]: must be less than 6
-[actual value]: 7
-[actual value type]: Number"
-`;

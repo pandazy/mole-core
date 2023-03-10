@@ -1,7 +1,6 @@
 import { isArray, from } from './array-methods';
-import { ns } from './ns';
 
-describe(ns('arrayMethods'), () => {
+describe('arrayMethods', () => {
   it('should proxy Array.from', () => {
     expect.assertions(1);
 
