@@ -1,14 +1,14 @@
 import fs from 'fs';
+import path from 'path';
 import {
-  getLibPath,
   getUserPath,
   writeUserFile,
   makeUserDir,
-  readLibFile,
   readUserFile,
   removeUserFile,
   justRead,
   getUserRepoName,
+  pathResolve,
 } from './files';
 
 jest.mock('./globals', () => ({
@@ -26,13 +26,22 @@ jest.mock('fs', () => ({
   mkdirSync: jest.fn(),
 }));
 
+jest.mock('path', () => ({
+  resolve: jest
+    .fn()
+    .mockImplementation((...paths: string[]): string => paths.join('/').replace('//', '/')),
+  basename: jest.fn().mockReturnValue('walterbase'),
+}));
+
 function asMockFn<T extends (...args: any[]) => any>(fn: T): jest.MockedFunction<T> {
   return fn as unknown as jest.MockedFunction<T>;
 }
 
 describe('files', () => {
-  it('should return the lib path', () => {
-    expect(getLibPath('mike', 'office')).toBe('/gus/mike/office');
+  it('should resolve a path', () => {
+    expect(pathResolve('foo', 'bar', 'baz')).toBe('foo/bar/baz');
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    expect(asMockFn(path.resolve)).toHaveBeenCalledWith('foo', 'bar', 'baz');
   });
 
   it('should return the user path', () => {
@@ -40,13 +49,15 @@ describe('files', () => {
   });
 
   it('should get user repo name', () => {
-    expect(getUserRepoName()).toBe('walter');
+    expect(getUserRepoName()).toBe('walterbase');
   });
 
   it('should read a file', () => {
     const expectedPath = '/walter/jesse';
     asMockFn(fs.existsSync).mockReturnValue(true);
-    asMockFn(fs.readFileSync).mockImplementation((path): string => `experiment: ${path as string}`);
+    asMockFn(fs.readFileSync).mockImplementation(
+      (readPath): string => `experiment: ${readPath as string}`
+    );
 
     const result = justRead(expectedPath);
     expect(result).toBe(`experiment: ${expectedPath}`);
@@ -59,19 +70,6 @@ describe('files', () => {
 
     const result = justRead(expectedPath);
     expect(result).toBe('');
-    expect(asMockFn(fs.existsSync)).toHaveBeenCalledWith(expectedPath);
-  });
-
-  it('should read a lib file', () => {
-    const expectedPath = '/gus/mike';
-    asMockFn(fs.existsSync).mockReturnValue(true);
-    asMockFn(fs.readFileSync).mockImplementation(
-      (relPath): string => `errand: ${relPath as string}`
-    );
-
-    const result = readLibFile('mike');
-
-    expect(result).toBe(`errand: ${expectedPath}`);
     expect(asMockFn(fs.existsSync)).toHaveBeenCalledWith(expectedPath);
   });
 

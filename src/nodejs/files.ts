@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { getProcess, getLibDir } from './globals';
+import { getProcess } from './globals';
 
 export const getBasename = path.basename.bind(path);
 
@@ -8,12 +8,12 @@ export function getUserPath(...paths: string[]): string {
   return path.resolve(getProcess().cwd(), ...paths);
 }
 
-export function getUserRepoName(): string {
-  return getBasename(getUserPath(''));
+export function pathResolve(...paths: string[]): string {
+  return path.resolve(...paths);
 }
 
-export function getLibPath(...paths: string[]): string {
-  return path.resolve(getLibDir(), ...paths);
+export function getUserRepoName(): string {
+  return getBasename(getUserPath(''));
 }
 
 export function exists(filePath: string): boolean {
@@ -25,10 +25,6 @@ export function justRead(filePath: string): string {
     return '';
   }
   return fs.readFileSync(filePath, 'utf8');
-}
-
-export function readLibFile(...paths: string[]): string {
-  return justRead(getLibPath(...paths));
 }
 
 export function readUserFile(...paths: string[]): string {
