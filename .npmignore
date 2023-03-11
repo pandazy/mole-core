@@ -1,5 +1,6 @@
 # vscode settings
 .vscode
+.husky
 
 # Logs
 logs
@@ -12,10 +13,21 @@ yarn-error.log*
 tsconfig.json
 tsconfig.build.json
 
-src
-
 # Test settings
 jest.config.js
+jest.config.ts
+
+.eslintignore
+.eslintrc.js
+
+.prettierrc
+.prettierrc.js
+.prettierrc.json
+
+commitlint.config.js
+
+mole-kit
+src
 
 # Coverage directory used by tools like istanbul
 coverage
@@ -26,4 +38,5 @@ node_modules/
 # Optional npm cache directory
 .npm
 
+# pandazy developer's personal settings
 .pandazy

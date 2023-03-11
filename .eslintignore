@@ -1,8 +1,9 @@
 dist
-starter-kit
+mole-kit
 node_modules
 *.ts.snap
 jest.config.js
 jest.config.ts
+commitlint.config.js
 .eslintrc.*
 *.json
