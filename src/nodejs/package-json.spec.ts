@@ -35,4 +35,8 @@ describe('nodejs.packageJson', () => {
       baz: 'qux',
     });
   });
+
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
 });
