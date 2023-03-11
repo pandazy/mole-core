@@ -15,3 +15,15 @@ const isWithin =
         value >= from && value <= to;
 
 export { isGt, isLt, isWithin };
+
+export function shouldVeBeenGt(standard: number): Error {
+  return new Error(`should be greater than ${standard}`);
+}
+
+export function shouldVeBeenLt(standard: number): Error {
+  return new Error(`should be less than ${standard}`);
+}
+
+export function shouldVeBeenWithin(from: number, to: number): Error {
+  return new Error(`should be within ${from} and ${to}`);
+}

@@ -1,4 +1,11 @@
-import { isWithin, isGt, isLt } from './number-check';
+import {
+  isWithin,
+  isGt,
+  isLt,
+  shouldVeBeenGt,
+  shouldVeBeenLt,
+  shouldVeBeenWithin,
+} from './number-check';
 
 describe('number-check', () => {
   it('should decide a range of two numbers', () => {
@@ -26,5 +33,26 @@ describe('number-check', () => {
     expect(isGt4(4)).toBe(false);
     expect(isGt4(5)).toBe(true);
     expect(isGt4(2)).toBe(false);
+  });
+
+  it('should make an error if NOT greater than', () => {
+    expect.assertions(1);
+
+    const error = shouldVeBeenGt(4);
+    expect(error.message).toBe('should be greater than 4');
+  });
+
+  it('should make an error if NOT less than', () => {
+    expect.assertions(1);
+
+    const error = shouldVeBeenLt(4);
+    expect(error.message).toBe('should be less than 4');
+  });
+
+  it('should make an error if NOT within', () => {
+    expect.assertions(1);
+
+    const error = shouldVeBeenWithin(4, 7);
+    expect(error.message).toBe('should be within 4 and 7');
   });
 });
