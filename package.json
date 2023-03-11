@@ -1,6 +1,6 @@
 {
   "name": "@pandazy/mole-core",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "A fundamental utility library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
