@@ -9,7 +9,7 @@ jest.mock('./files', () => ({
   getUserPath: jest.fn(() => '/home/walter'),
 }));
 
-describe('nodejs.tar', () => {
+describe('nodejs.tars', () => {
   it('should pack files', () => {
     tar('/home/walter/package.tgz', 'jesse.txt, mike.txt, gus.txt');
     expect(execSync).toBeCalledWith(
