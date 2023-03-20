@@ -10,6 +10,10 @@ jest.mock('./files', () => ({
 }));
 
 describe('nodejs.tars', () => {
+  beforeEach(() => {
+    (execSync as jest.Mock).mockReset();
+  });
+
   it('should pack files', () => {
     tar('/home/walter/package.tgz', 'jesse.txt, mike.txt, gus.txt');
     expect(execSync).toBeCalledWith(
@@ -18,9 +22,9 @@ describe('nodejs.tars', () => {
     );
   });
 
-  it('should unpack files to (by default) cwd of the user', () => {
+  it('should unpack files with default untar settings if target is not specified', () => {
     untar('/home/walter/package.tgz');
-    expect(execSync).toBeCalledWith('tar -xzf /home/walter/package.tgz -C /home/walter', {
+    expect(execSync).toBeCalledWith('tar -xzf /home/walter/package.tgz', {
       stdio: 'inherit',
     });
   });
