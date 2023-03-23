@@ -1,4 +1,4 @@
-import { readUserFile } from './files';
+import { readUserFile } from '~nodejs/files';
 
 export type PackageJSON = Record<string, unknown>;
 

@@ -1,4 +1,4 @@
-import yesNo from '~nodejs/asks/yes-no';
-import choices from '~nodejs/asks/choices';
+import yesNo from './yes-no';
+import choices from './choices';
 
 export { yesNo, choices };

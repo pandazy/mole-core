@@ -1,5 +1,5 @@
 import { execSync } from 'child_process';
-import { getUserPath, getUserRepoName } from './files';
+import { getUserPath, getUserRepoName } from '~nodejs/files';
 
 export const getNodeModuleVolume = (): string => `mole_${getUserRepoName()}_node_modules`;
 

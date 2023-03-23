@@ -1,5 +1,5 @@
-import negate from '~logic/negate';
+import negate from './negate';
 
 export { negate };
-export * from '~logic/swt-case';
-export * from '~logic/and-or';
+export * from './swt-case';
+export * from './and-or';

@@ -1,5 +1,5 @@
-import searchAll from './search-all';
-import { keys } from '../object-methods';
+import searchAll from '~string/search-all';
+import { keys } from '~/object-methods';
 
 export const replaceAll =
   (target: string) =>
