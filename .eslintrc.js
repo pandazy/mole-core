@@ -1,8 +1,9 @@
+const { default: moleEslint } = require('@pandazy/mole-config/dist/eslint.config.js');
+
 module.exports = {
-  "extends": [
-    "@pandazy/eslint-config-mole"
-  ],
+  ...moleEslint,
   "parserOptions": {
+    ...(moleEslint.parserOptions || {}),
     "project": "./tsconfig.json",
     "tsconfigRootDir": __dirname
   },

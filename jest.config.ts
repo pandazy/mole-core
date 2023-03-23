@@ -1,6 +1,3 @@
-export default {
-  "preset": "@pandazy/mole-config",
-  roots: [
-    './src'
-  ],
-};
+import moleJestConfig from '@pandazy/mole-config/dist/jest.config';
+
+export default moleJestConfig;

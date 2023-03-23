@@ -4,6 +4,7 @@ node_modules
 *.ts.snap
 jest.config.js
 jest.config.ts
+babel.config.js
 commitlint.config.js
 .eslintrc.*
 *.json

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import path from 'path';
+import { resolve } from 'path';
 import {
   getUserPath,
   writeUserFile,
@@ -8,14 +8,10 @@ import {
   removeUserFile,
   justRead,
   getUserRepoName,
-  pathResolve,
 } from './files';
 
-jest.mock('./globals', () => ({
-  getProcess: (): { cwd: () => string } => ({
-    cwd: jest.fn().mockReturnValue('/walter'),
-  }),
-  getLibDir: jest.fn().mockReturnValue('/gus'),
+jest.mock('process', () => ({
+  cwd: jest.fn().mockReturnValue('/walter'),
 }));
 
 jest.mock('fs', () => ({
@@ -37,11 +33,11 @@ function asMockFn<T extends (...args: any[]) => any>(fn: T): jest.MockedFunction
   return fn as unknown as jest.MockedFunction<T>;
 }
 
-describe('files', () => {
+describe('nodejs.files', () => {
   it('should resolve a path', () => {
-    expect(pathResolve('foo', 'bar', 'baz')).toBe('foo/bar/baz');
+    expect(resolve('foo', 'bar', 'baz')).toBe('foo/bar/baz');
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    expect(asMockFn(path.resolve)).toHaveBeenCalledWith('foo', 'bar', 'baz');
+    expect(asMockFn(resolve)).toHaveBeenCalledWith('foo', 'bar', 'baz');
   });
 
   it('should return the user path', () => {
@@ -126,7 +122,7 @@ describe('files', () => {
 
     removeUserFile({
       paths: ['jesse'],
-      afterRemoval: (filePath: string) => {
+      afterActualRemoval: (filePath: string) => {
         afterSpy();
         expect(filePath).toBe(expectedPath);
       },

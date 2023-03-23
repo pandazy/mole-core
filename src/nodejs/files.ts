@@ -1,30 +1,22 @@
-import fs from 'fs';
-import path from 'path';
-import { getProcess } from './globals';
+import { existsSync, readFileSync, mkdirSync, unlinkSync, writeFileSync } from 'fs';
+import path, { resolve } from 'path';
+import { cwd } from 'process';
 
 export const getBasename = path.basename.bind(path);
 
 export function getUserPath(...paths: string[]): string {
-  return path.resolve(getProcess().cwd(), ...paths);
-}
-
-export function pathResolve(...paths: string[]): string {
-  return path.resolve(...paths);
+  return resolve(cwd(), ...paths);
 }
 
 export function getUserRepoName(): string {
   return getBasename(getUserPath(''));
 }
 
-export function exists(filePath: string): boolean {
-  return fs.existsSync(filePath);
-}
-
 export function justRead(filePath: string): string {
-  if (!exists(filePath)) {
+  if (!existsSync(filePath)) {
     return '';
   }
-  return fs.readFileSync(filePath, 'utf8');
+  return readFileSync(filePath, 'utf8');
 }
 
 export function readUserFile(...paths: string[]): string {
@@ -32,8 +24,8 @@ export function readUserFile(...paths: string[]): string {
 }
 
 export function justMkdir(dirPath: string): void {
-  if (!exists(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true });
+  if (!existsSync(dirPath)) {
+    mkdirSync(dirPath, { recursive: true });
   }
 }
 
@@ -43,7 +35,7 @@ export function makeUserDir(...paths: string[]): void {
 }
 
 export function justWriteFile(filePath: string, content: string): void {
-  fs.writeFileSync(filePath, content, { encoding: 'utf8' });
+  writeFileSync(filePath, content, { encoding: 'utf8' });
 }
 
 export interface WriteFileOptions {
@@ -58,18 +50,21 @@ export function writeUserFile({ paths, content }: WriteFileOptions): void {
 type AfterRemoval = (filePath: string) => void;
 
 export function justRemoveFile(filePath: string, afterRemoval?: AfterRemoval): void {
-  if (exists(filePath)) {
-    fs.unlinkSync(filePath);
+  if (existsSync(filePath)) {
+    unlinkSync(filePath);
     afterRemoval?.(filePath);
   }
 }
 
 export interface RemoveFileOptions {
   paths: string[];
-  afterRemoval?: (filePath: string) => void;
+  afterActualRemoval?: (filePath: string) => void;
 }
 
-export function removeUserFile({ paths, afterRemoval }: RemoveFileOptions): void {
+export function removeUserFile({
+  paths,
+  afterActualRemoval: afterRemoval,
+}: RemoveFileOptions): void {
   const filePath = getUserPath(...paths);
   justRemoveFile(filePath, afterRemoval);
 }

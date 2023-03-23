@@ -1,8 +1,7 @@
 import readline from 'readline';
-import { getProcess } from './globals';
+import { stdin, stdout } from 'process';
 
-export default function askYesNo(question: string): Promise<boolean> {
-  const { stdin, stdout } = getProcess();
+export default function yesNo(question: string): Promise<boolean> {
   const rl = readline.createInterface({
     input: stdin,
     output: stdout,

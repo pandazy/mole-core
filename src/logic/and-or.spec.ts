@@ -1,13 +1,13 @@
-import { and, or } from './and-or';
+import { and, or } from '~logic/and-or';
 
 describe('logic.andOr', () => {
-  type Profile = { name?: any; age?: number };
+  type Profile = { name?: string; age?: number };
 
   it('should do AND', () => {
     expect.assertions(3);
 
     const isJohn42 = and<[Profile]>(
-      ({ name }: any) => name === 'john',
+      ({ name }) => name === 'john',
       ({ age }) => age === 42
     );
     expect(isJohn42({ name: 'john', age: 42 })).toBe(true);

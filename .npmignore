@@ -26,7 +26,6 @@ jest.config.ts
 
 commitlint.config.js
 
-mole-kit
 src
 
 # Coverage directory used by tools like istanbul
