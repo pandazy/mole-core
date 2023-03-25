@@ -1,3 +1,7 @@
+import rangeReduce from './range-reduce';
+
+export { rangeReduce };
+
 export * from './logic';
 export * from './string';
 export * from './object-methods';
