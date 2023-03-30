@@ -1,6 +1,0 @@
-{
-  "~": "./src",
-  "~logic": "./src/logic",
-  "~nodejs": "./src/nodejs",
-  "~string": "./src/string"
-}
